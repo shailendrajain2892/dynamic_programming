@@ -30,18 +30,23 @@ def lcs_tab(s1, s2, m, n, tab):
     return tab
 
 def lcs_memo(s1, s2, m, n):
-    memo = [[-1 for _ in range(n+1)] for _ in range(m+1)]
-    for i in range(m+1):
-        memo[i][0] = 0
-    for j in range(n+1):
-        memo[0][j] = 0
+    def _initialize():
+        memo = [[-1 for _ in range(n+1)] for _ in range(m+1)]
+        for i in range(m+1):
+            memo[i][0] = 0
+        for j in range(n+1):
+            memo[0][j] = 0
+        return memo
     # print(memo)
+    memo = _initialize()
     solve_recur_dp(s1, s2, m, n, memo)
-    print(f"print table : {[print(*line) for line in memo]}")
+    print(f"memoization solution : {memo}")
+    # print(f"print table : {[print(*line) for line in memo]}")
     print(f"lcs is : {memo[m][n]}")
+    memo = _initialize()
     print("*"*50)
     print(lcs_tab(s1, s2, m, n, memo))
-    print([print(*line) for line in memo])
+    # print([print(*line) for line in memo])
 
 s1 = "bit" # input("Enter first string: ")
 s2 = "bat" # input("Enter Second string: ")
